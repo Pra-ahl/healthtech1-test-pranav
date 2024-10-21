@@ -8,7 +8,7 @@ export const flows: Flow[] = [
   {
     trigger: 'websiteSignup',
     actions: [
-      { type: 'timer', delay: 2 }, // 2 hours time delay - can be changed in future (this is in milliseconds) * 60 * 60 * 1000
+      { type: 'timer', delay: 2 * 60 * 60 * 1000}, // 2 hours time delay - can be changed in future (this is in milliseconds)
       { type: 'email', subject: 'Welcome to our sock store!', body: 'Thank you for signing up...' } // Adding subject & body separately to the email to allow customisation later
     ]
   },
