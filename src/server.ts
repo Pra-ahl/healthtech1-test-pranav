@@ -21,7 +21,7 @@ console.log('Express app created and JSON middleware added.');
 //  * HELPER FUNCTIONS
 // */
 
-// Provided email sending func
+// email sending func as provided
 export const sendEmail = async (): Promise<boolean> => {
   const randomNumber = Math.random();
   await new Promise(resolve => setTimeout(resolve, 100)); // Reduced timeout for testing
@@ -80,6 +80,7 @@ export const executeFlow = async (flow: Flow, userEmail: string): Promise<void> 
 // /*
 //  * API
 // */
+
 export const eventHandler = async (req: express.Request, res: express.Response) => {
   console.log('Received POST request to /event');
   const event: Event = req.body;
