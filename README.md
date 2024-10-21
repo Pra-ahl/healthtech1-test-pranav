@@ -50,6 +50,9 @@ You may need to change the port in the server.ts file as well as in the commands
 **Other Notes:**
 
 After running npm install and npm start, I had an error that looked like the following: 
+
+<br />
+
  npm start npm ERR! code EJSONPARSE npm ERR! JSON.parse Invalid package.json: JSONParseError: Unexpected end of JSON input while parsing empty string npm ERR! JSON.parse Failed to parse JSON data. npm ERR! JSON.parse Note: package.json must be actual JSON, not just JavaScript.
 
 If you encounter the same issue, I fixed this using the following commands:
