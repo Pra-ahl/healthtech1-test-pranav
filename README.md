@@ -5,12 +5,10 @@ I'm Pranav, candidate for the Senior Software Engineer role.
 Below you'll find run instructions and my observations for the email automation take home test.
 
 
-**To get started, run the following commands in the terminal:**
+**To get started, clone the repo or open the zip folder and run the following commands in the terminal:**
 
-1. git clone <repository-url>
-2. cd sock-email-automation
-3. npm install
-4. npm start (or npm run dev for auto reloading if you change anything in the code)
+1. npm install
+2. npm start (or npm run dev for auto reloading if you change anything in the code)
 
 
 **To test the email server, here are the commands you'll need to run in a separate terminal:**
@@ -31,33 +29,27 @@ You may need to change the port in the server.ts file as well as in the commands
 2. My computer is slow and I noticed that when I press ctrl+c to stop the server and run the command again it takes a while before the server actually starts back up. If this happens to you, just change the port in the server.ts file to 3001 or any other valid port number and it should work.
 
 
-**Failure cases I've considered**
+**Failure cases I've considered:**
 
 1. The server might fail to send an email - I've added retry logic. If the send email func fails 3 times in a row, the server will notify an admin of the failure (just printing this for simplicity, but in reality it would connect to your logging or other internal infrastructure)
 
 2. The 2 hr wait could block up the thread - so I've added async logic so that the server won't block the thread if you send subsequent POST requests.
 
 
-**Tests**
+**Tests:**
 
 1. Basic testing can be done by running the commands above as well as editing the timer in flows.ts or by editing the sendEmail function to always return false.
 
 2. More in depth testing can be done with the src/server.test.ts file. To do this in a terminal run -  npm test. I've made a test suite that tests for valid events, unknown events and also checks that the flows are correct.
 
 
+**Other Notes:**
 
+After running npm install and npm start, I had an error that looked like the following: 
+ npm start npm ERR! code EJSONPARSE npm ERR! JSON.parse Invalid package.json: JSONParseError: Unexpected end of JSON input while parsing empty string npm ERR! JSON.parse Failed to parse JSON data. npm ERR! JSON.parse Note: package.json must be actual JSON, not just JavaScript.
 
-
-
-Notes for Pranav for later:
-//   test('should retry sending email up to 3 times and notify admin on failure', async () => {
-//     (sendEmail as jest.Mock).mockResolvedValue(false);
-
-//     const consoleSpy = jest.spyOn(console, 'log');
-//     const emailAction: Action = { type: 'email', subject: 'Test Email', body: 'Test Body' };
-
-//     await executeAction(emailAction, 'test@example.com');
-
-//     expect(sendEmail).toHaveBeenCalledTimes(3);
-//     expect(consoleSpy).toHaveBeenCalledWith('3 retries failed, admin pete@ht1 notified.');
-//   });
+I fixed this using the following commands:
+1. npm cache clean --force
+2. rm -rf node_modules package-lock.json
+3. npm install
+4. npm start
