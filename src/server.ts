@@ -10,7 +10,6 @@ import express from 'express';
 import { Event, Flow, Action, EmailAction } from './types';
 import { flows } from './flows';
 
-console.log('Starting server setup...');
 
 const app = express();
 app.use(express.json());
@@ -22,15 +21,14 @@ console.log('Express app created and JSON middleware added.');
 //  * HELPER FUNCTIONS
 // */
 
-// MOCK EMAIL SENDING FUNCTION
+// Provided email sending func
 export const sendEmail = async (): Promise<boolean> => {
   const randomNumber = Math.random();
   await new Promise(resolve => setTimeout(resolve, 100)); // Reduced timeout for testing
   return randomNumber < 0.95;
 };
-console.log('sendEmail function defined.');
 
-// FUNCTION TO EXECUTE THE ACTIONS DEFINED IN flows.ts
+// Func to execute actions defined in flows.ts
 export const executeAction = async (action: Action, userEmail: string): Promise<boolean> => {
   console.log(`Executing action: ${action.type}`);
   switch (action.type) {
@@ -61,9 +59,8 @@ export const executeAction = async (action: Action, userEmail: string): Promise<
       return false;
   }
 };
-console.log('executeAction function defined.');
 
-// FUNCTION TO EXECUTE THE ACTIONS DEFINED IN flows.ts
+// Func to execute flows defined in flows.ts
 export const executeFlow = async (flow: Flow, userEmail: string): Promise<void> => {
   console.log(`Starting flow execution for ${flow.trigger}`);
   for (const action of flow.actions) {
@@ -78,11 +75,10 @@ export const executeFlow = async (flow: Flow, userEmail: string): Promise<void> 
   }
   console.log(`Flow execution completed for ${flow.trigger}`);
 };
-console.log('executeFlow function defined.');
 
 
 // /*
-//  * ROUTES
+//  * API
 // */
 export const eventHandler = async (req: express.Request, res: express.Response) => {
   console.log('Received POST request to /event');
@@ -102,11 +98,10 @@ export const eventHandler = async (req: express.Request, res: express.Response) 
 
 app.post('/event', eventHandler);
 
-console.log('POST /event route defined.');
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 });
 
-console.log('Server setup completed.');
+console.log('Server setup complete');

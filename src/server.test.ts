@@ -16,7 +16,7 @@ jest.mock('./server', () => {
   const originalModule = jest.requireActual('./server');
   return {
     ...originalModule,
-    sendEmail: jest.fn(), // mock function for send email so I can control the returned value in my tests
+    sendEmail: jest.fn(), // mock function for send email so I can control the returned value in my test cases below
   };
 });
 
@@ -52,7 +52,7 @@ describe('Event API', () => {
     expect(response.status).toBe(404);
     expect(response.body.message).toBe('No matching flow found for the event');
   });
-  
+
 
   // These tests below will need to be customised if the actions in the flows are changed
 
