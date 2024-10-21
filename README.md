@@ -1,6 +1,6 @@
 Hey 👋
 
-I'm Pranav, candidate for the Senior Software Engineer role.
+I'm Pranav, candidate for the Senior Software Engineer role at Healthtech1.
 
 Below you'll find run instructions and my observations for the email automation take home test.
 
